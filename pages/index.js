@@ -1,82 +1,102 @@
-import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { login } from '../api/base'
+import { showToast } from '../components/helpers'
 
-export default function Home() {
+const Home = () => {
+
+  useEffect(() => {
+    sessionStorage.clear()  
+  }, [])
+
+  const router = useRouter()
+
+  const [user, setUser] = useState({ identifier: '', password: '' })
+
+  const handleLogin = async e => {
+    e.preventDefault()
+    try {
+      if (user.identifier === '' || user.password === '') {
+        throw { message: 'Please enter details' }
+      }
+
+      const res = await login(user)
+      res.status === 200 && (
+        
+        router.push('/dashboard'),
+        showToast('success', `Welcome ${user.identifier}`)
+      )
+
+    } catch (err) {
+      showToast('error', err.message)
+    }
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="flex items-center min-h-screen p-6 bg-gray-100">
+      <div
+        className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800"
+      >
+        <div className="flex flex-col overflow-y-auto md:flex-row">
+          <div className="h-32 md:h-auto md:w-1/2">
+            <img
+              aria-hidden="true"
+              className="object-cover w-full h-full dark:hidden"
+              src="../assets/img/login-office.jpeg"
+              alt="Office"
+            />
+          </div>
+          <div className="flex lg:order-first items-center justify-center p-6 sm:p-12 md:w-1/2">
+            <div className="w-full">
+              <form onSubmit={handleLogin}>
+                <label className="block text-sm">
+                  <span className="text-gray-400 font-semibold">Parent Email or Staff ID</span>
+                  <input
+                    value={user.identifier}
+                    onChange={e => setUser({ ...user, identifier: e.target.value })}
+                    className="block w-full mt-1 text-sm border border-blue-400 focus:outline-none focus:border-blue-400 focus:ring-blue-300 focus:ring-2 form-input p-3 rounded-lg"
+                    placeholder="Jane Doe"
+                  />
+                </label>
+                <label className="block mt-4 text-sm">
+                  <span className="text-gray-400 font-semibold">Password</span>
+                  <input
+                    value={user.password}
+                    onChange={e => setUser({ ...user, password: e.target.value })}
+                    className="block w-full mt-1 text-sm border border-blue-400 focus:outline-none focus:border-blue-400 focus:ring-blue-300 focus:ring-2 form-input p-3 rounded-lg"
+                    placeholder="Password" type="password"
+                  />
+                </label>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+                <button type='submit'
+                  className="block w-full px-4 py-3 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-400 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue"
+                >
+                  Log in
+                </button>
+              </form>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+              <p className="mt-4 text-center">
+                <a
+                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                  href="./forgot-password.html"
+                >
+                  Forgot your password?
+                </a>
+              </p>
+              <p className="mt-1 text-center">
+                <a
+                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                  href="./create-account.html"
+                >
+                  Are you a teacher? Create account
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+      </div>
     </div>
   )
 }
+
+export default Home
