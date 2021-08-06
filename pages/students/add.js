@@ -187,7 +187,7 @@ const AddStudent = () => {
             <Navbar />
             <div className="container">
                 <BreadCrumb currentPage='Add Student' prevPage='Students' prevLink='/students' />
-                <div className="container">
+                <div className="lg:container">
                     <form className="form mb-10 p-10 border rounded-lg bg-gray-50 shadow-sm" onSubmit={handleStudentSubmit}>
                         <p className="text-gray-400 font-bold">Add Student</p>
                         <div className="grid grid-cols lg:grid-cols-2 gap-6 py-5">
@@ -273,51 +273,45 @@ const AddStudent = () => {
                                 onChange={e => setStudent({ ...student, class: e.target.value })}
                             />
 
-                            <div className="col-span-2">
-                                {/* Guardian 1 Email */}
-                                <Input
-                                    label='Guardian 1'
-                                    placeholder='Guardian 1 Email'
-                                    icon={
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            <Input
+                                label='Guardian 1'
+                                placeholder='Guardian 1 Email'
+                                icon={
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                }
+                                trailingIcon={
+                                    <button onClick={() => openGuardianModal('1')} type='button'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                                         </svg>
-                                    }
-                                    trailingIcon={
-                                        <button onClick={() => openGuardianModal('1')} type='button'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    }
-                                    value={student.guardian_1}
-                                    onChange={e => setStudent({ ...student, guardian_1: e.target.value })}
-                                />
-                            </div>
+                                    </button>
+                                }
+                                value={student.guardian_1}
+                                onChange={e => setStudent({ ...student, guardian_1: e.target.value })}
+                            />
 
-                            <div className="col-span-2">
-                                {/* Guardian 2 Email */}
-                                <Input
-                                    label='Guardian 2 (Optional)'
-                                    placeholder='Guardian 2 Email'
-                                    icon={
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            <Input
+                                label='Guardian 2 (Optional)'
+                                placeholder='Guardian 2 Email'
+                                icon={
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                }
+                                trailingIcon={
+                                    <button onClick={() => openGuardianModal('2')} type='button'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                                         </svg>
-                                    }
-                                    trailingIcon={
-                                        <button onClick={() => openGuardianModal('2')} type='button'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    }
-                                    value={student.guardian_2.email}
-                                    onChange={e => setStudent({ ...student, guardian_2: e.target.value })}
-                                />
-                            </div>
+                                    </button>
+                                }
+                                value={student.guardian_2.email}
+                                onChange={e => setStudent({ ...student, guardian_2: e.target.value })}
+                            />
                         </div>
                         <div className="flex justify-end">
                             {/* Student Button */}
