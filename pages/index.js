@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { login } from '../api/base'
 import { showToast } from '../components/helpers'
+import { MyLoader } from '../components/loader'
 
 const Home = () => {
 
@@ -33,7 +34,10 @@ const Home = () => {
   }
 
   return (
+    <>
+    <MyLoader />
     <div className="flex items-center min-h-screen p-6 bg-gray-100">
+      
       <div
         className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800"
       >
@@ -96,6 +100,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
