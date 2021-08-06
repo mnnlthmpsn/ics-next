@@ -1,7 +1,6 @@
 import axios from "axios"
 
-export const apiURL = 'http://localhost:1337'
-
+const apiURL = process.env.apiURL
 
 export const signup = async payload => {
     try {

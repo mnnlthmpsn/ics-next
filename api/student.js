@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const apiURL = 'http://localhost:1337'
+const apiURL = process.env.apiURL
 
 export const add_student = async student => {
     try {
