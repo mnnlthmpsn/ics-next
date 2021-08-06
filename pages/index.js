@@ -35,7 +35,6 @@ const Home = () => {
 
   return (
     <>
-    <MyLoader />
     <div className="flex items-center min-h-screen p-6 bg-gray-100">
       
       <div
