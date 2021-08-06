@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiURL = process.env.NODE_ENV == 'production' 
-    ? 'https://next-ics.herokuapp.com/' 
+    ? 'https://next-ics.herokuapp.com' 
     : 'http://localhost:1337'
 
 export const get_all_teachers = async () => {
