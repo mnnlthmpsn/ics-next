@@ -1,6 +1,6 @@
 export const MyLoader = () => {
     return (
-        <div className="w-full h-full fixed bg-white z-50 opacity-75">
+        <div className="w-full h-full absolute top-0 bg-white opacity-75">
             <span className="text-blue-400 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0">
                 <span className="flex justify-center h-24">
                     <span className="absolute  animate-ping flex items-center justify-center rounded-full h-24 w-24 bg-blue-600"></span>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { login } from '../api/base'
 import { showToast } from '../components/helpers'
-import { MyLoader } from '../components/loader'
 
 const Home = () => {
 
