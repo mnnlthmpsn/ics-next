@@ -1,9 +1,12 @@
 import { Fragment } from "react"
 
 const Table = props => {
+
+    console.log(props.data)
+
     return (
         <Fragment>
-            <div className="w-full overflow-hidden border border-gray-300 rounded-lg mb-5">
+            <div className="w-full overflow-hidden border border-gray-300 rounded-b-lg mb-5">
                 <div className="w-full overflow-x-auto">
                     <table className="w-full whitespace-no-wrap">
                         <thead>
@@ -27,24 +30,32 @@ const Table = props => {
                                         <tr className="text-gray-700 dark:text-gray-400" key={index}>
                                             <td className="px-4 py-3">
                                                 <div className="flex items-center text-sm">
-                                                    {/* <!-- Avatar with inset shadow --> */}
                                                     <div>
                                                         {props.role === 'parent' && <p className="font-semibold">{data.firstname}</p>}
                                                         {props.role === 'student' && <p className="font-semibold">{data.firstname}</p>}
+                                                        {props.role === 'clss' && <p className="font-semibold">{data.firstname}</p>}
+                                                        {props.role === 'assignment' && <p className="font-semibold">{data.class.title}</p>}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="px-4 py-3 text-sm">
                                                 {props.role === 'parent' && <p className="font-semibold">{data.lastname}</p>}
                                                 {props.role === 'student' && <p className="font-semibold">{data.lastname}</p>}
+                                                {props.role === 'clss' && <p className="font-semibold">{data.lastname}</p>}
+                                                {props.role === 'assignment' && <p className="font-semibold capitalize">{data.overdue.toString()}</p>}
                                             </td>
-                                            <td className="px-4 py-3 text-sm">
-                                                {props.role === 'parent' && <p>{data.email}</p>}
-                                                {props.role === 'student' && <p>{data.clss.title}</p>}
-                                            </td>
+                                            {
+                                                props.role !== 'clss' && <td className="px-4 py-3 text-sm">
+                                                    {props.role === 'parent' && <p>{data.email}</p>}
+                                                    {props.role === 'student' && <p>{data.clss.title}</p>}
+                                                    {props.role === 'assignment' && <a href={`${data?.assignment[0].url}`} className="font-semibold text-blue-500" download>{data?.assignment[0]?.name}</a>}
+                                                </td>
+                                            }
                                             <td className="px-4 py-3 text-sm">
                                                 {props.role === 'parent' && <p>{data.phone}</p>}
                                                 {props.role === 'student' && <p>{data.gender}</p>}
+                                                {props.role === 'clss' && <p>{data.gender}</p>}
+                                                {props.role === 'assignment' && <p className="font-semibold">{data.solutions?.length}</p>}
                                             </td>
                                             <td className="px-4 py-3">
                                                 <div className="flex items-center space-x-4 text-sm">
@@ -86,7 +97,7 @@ const Table = props => {
                                     ))
                                     : <tr>
                                         <td>
-                                        <p className="p-4 text-gray-400 text-md font-semibold">No Data found</p>
+                                            <p className="p-4 text-gray-400 text-md font-semibold">No Data found</p>
                                         </td>
                                     </tr>
                             }

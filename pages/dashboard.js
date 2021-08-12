@@ -97,7 +97,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* actions */}
-                <div className="border border-2 border-dotted rounded-xl bg-gray-50 my-10">
+                <div className="border-2 border-dotted rounded-xl bg-gray-50 my-10">
                     <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-4 gap-y-10 p-16 place-items-center">
 
                         {/* Students */}
@@ -127,7 +127,7 @@ const Dashboard = () => {
                         {/* Assignments */}
                         <NavMain
                             title='Assignments'
-                            path='/students'
+                            path='/assignments'
                             icon={
                                 <svg className="h-32 w-32"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -151,7 +151,7 @@ const Dashboard = () => {
                         {/* Classes */}
                         <NavMain
                             title='Classes'
-                            path='/students'
+                            path='/classes'
                             icon={
                                 <svg className="h-32 w-32"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
