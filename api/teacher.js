@@ -54,3 +54,19 @@ export const get_assignments = async () => {
 }
 
 // upload assignment
+
+export const get_all_departments = async () => {
+    try {
+        return await axios.get(`${apiURL}/departments`)
+    } catch (err) {
+        throw err
+    }
+}
+
+export const add_department = async title => {
+    try {
+        return await axios.post(`${apiURL}/departments`, {title})
+    } catch (err) {
+        throw err
+    }
+}

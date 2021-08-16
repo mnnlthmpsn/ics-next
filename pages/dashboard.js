@@ -139,7 +139,7 @@ const Dashboard = () => {
                         {/* Departments */}
                         <NavMain
                             title='Departments'
-                            path='/students'
+                            path='/departments'
                             icon={
                                 <svg className="h-32 w-32"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

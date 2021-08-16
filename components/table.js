@@ -1,9 +1,6 @@
-import { Fragment } from "react"
+import { Fragment, memo } from "react"
 
 const Table = props => {
-
-    console.log(props.data)
-
     return (
         <Fragment>
             <div className="w-full overflow-hidden border border-gray-300 rounded-b-lg mb-5">
@@ -35,6 +32,7 @@ const Table = props => {
                                                         {props.role === 'student' && <p className="font-semibold">{data.firstname}</p>}
                                                         {props.role === 'clss' && <p className="font-semibold">{data.firstname}</p>}
                                                         {props.role === 'assignment' && <p className="font-semibold">{data.class.title}</p>}
+                                                        {props.role === 'dept' && <p className="font-semibold">{data.title}</p>}
                                                     </div>
                                                 </div>
                                             </td>
@@ -43,6 +41,7 @@ const Table = props => {
                                                 {props.role === 'student' && <p className="font-semibold">{data.lastname}</p>}
                                                 {props.role === 'clss' && <p className="font-semibold">{data.lastname}</p>}
                                                 {props.role === 'assignment' && <p className="font-semibold capitalize">{data.overdue.toString()}</p>}
+                                                {props.role === 'dept' && <p className="font-semibold capitalize">{data.teachers.length}</p>}
                                             </td>
                                             {
                                                 props.role !== 'clss' && <td className="px-4 py-3 text-sm">
