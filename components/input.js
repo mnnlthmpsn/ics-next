@@ -38,7 +38,7 @@ export const Select = props => {
                     value={props.value}
                     className="block w-full pl-10 py-4 rounded mt-1 text-sm border text-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input"
                 >
-                    <option value="" disabled>-- Select {props.placeholder} --</option>
+                    <option value="" disabled selected>-- Select {props.placeholder} --</option>
                     {
                         props.options && props.options.map((optionItem, index) => (
                             <option value={optionItem.value} key={index}>{optionItem.key}</option>
