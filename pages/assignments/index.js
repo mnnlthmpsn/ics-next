@@ -27,7 +27,6 @@ const Assignments = () => {
     const getAllAssignments = async () => {
         try {
             const res = await get_assignments()
-            console.log(res)
             res.status === 200 && setAssignments(res.data)
         } catch (err) {
             showToast('error', err.message)

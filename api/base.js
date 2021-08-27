@@ -16,6 +16,7 @@ export const login = async payload => {
     try {
         const res = await axios.post(`${apiURL}/auth/local`, payload)
         if (res.status === 200) {
+            console.log(res.data)
             sessionStorage.setItem('auth', res.data.jwt)
             return res
         }

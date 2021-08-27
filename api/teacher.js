@@ -70,3 +70,20 @@ export const add_department = async title => {
         throw err
     }
 }
+
+// attendance
+export const get_all_attendances = async () => {
+    try {
+        return await axios.get(`${apiURL}/attendances`)
+    } catch (err) {
+        throw err
+    }
+}
+
+export const take_attendance = async payload => {
+    try {
+        return await axios.post(`${apiURL}/attendances`, payload)
+    } catch (err) {
+        throw err
+    }
+}

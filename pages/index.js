@@ -54,7 +54,7 @@ const Home = () => {
                   <input
                     value={user.identifier}
                     onChange={e => setUser({ ...user, identifier: e.target.value })}
-                    className="block w-full mt-1 text-sm border border-blue-400 focus:outline-none focus:border-blue-400 focus:ring-blue-300 focus:ring-2 form-input p-3 rounded-lg"
+                    className="form-control"
                     placeholder="Jane Doe"
                   />
                 </label>

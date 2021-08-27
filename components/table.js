@@ -1,8 +1,56 @@
-import { Fragment, memo } from "react"
+import { useRouter } from "next/router"
+import { Fragment, useState } from "react"
+import { get_blk_students } from "../api/student"
+import { showToast } from "./helpers"
 
 const Table = props => {
+
+    const [open, setOpen] = useState(false)
+    const [students, setStudents] = useState([])
+    const router = useRouter()
+
+    const getStudents = async studs => {
+        try {
+            if (studs.length === 0) { return showToast('error', 'There are no students') }
+            else {
+                const query = []
+                studs.map(stud => query.push(`id_in=${stud.id}`))
+                const payload = query.join('&')
+                const res = await get_blk_students(payload)
+                res.status === 200 && setStudents(res.data)
+                setOpen(true)
+            }
+        } catch (err) {
+            console.log(err)
+            showToast('error', err.messasge)
+        }
+    }
+
     return (
         <Fragment>
+
+            {
+                open && <div className="absolute top-0 bg-white inset-0 flex justify-center opacity-90 transition-all transform duration-500 ease-in-out">
+                    <div className="border w-1/2 bg-gray-100 rounded mt-24 mb-10 overflow-y-auto opacity-full relative">
+                        <div className="flex justify-between rounded-t px-10 items-center fixed bg-gray-600 w-1/2">
+                            <p className="text-lg py-4 font-extrabold text-gray-400">Students</p>
+                            <button onClick={() => setOpen(false)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="px-10 flex flex-col mt-16">
+                            {
+                                students.map((stud, index) => (
+                                    <p className="stud.id">{index + 1}. {stud.firstname} {stud.lastname}</p>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
             <div className="w-full overflow-hidden border border-gray-300 rounded-b-lg mb-5">
                 <div className="w-full overflow-x-auto">
                     <table className="w-full whitespace-no-wrap">
@@ -33,6 +81,7 @@ const Table = props => {
                                                         {props.role === 'clss' && <p className="font-semibold">{data.firstname}</p>}
                                                         {props.role === 'assignment' && <p className="font-semibold">{data.class.title}</p>}
                                                         {props.role === 'dept' && <p className="font-semibold">{data.title}</p>}
+                                                        {props.role === 'attendance' && <p className="font-semibold">{data.date}</p>}
                                                     </div>
                                                 </div>
                                             </td>
@@ -42,12 +91,14 @@ const Table = props => {
                                                 {props.role === 'clss' && <p className="font-semibold">{data.lastname}</p>}
                                                 {props.role === 'assignment' && <p className="font-semibold capitalize">{data.overdue.toString()}</p>}
                                                 {props.role === 'dept' && <p className="font-semibold capitalize">{data.teachers.length}</p>}
+                                                {props.role === 'attendance' && <p className="font-semibold capitalize">{data.clss.title}</p>}
                                             </td>
                                             {
                                                 props.role !== 'clss' && <td className="px-4 py-3 text-sm">
                                                     {props.role === 'parent' && <p>{data.email}</p>}
                                                     {props.role === 'student' && <p>{data.clss.title}</p>}
                                                     {props.role === 'assignment' && <a href={`${data?.assignment[0].url}`} className="font-semibold text-blue-500" download>{data?.assignment[0]?.name}</a>}
+                                                    {props.role === 'attendance' && <p className="font-semibold">{data.description}</p>}
                                                 </td>
                                             }
                                             <td className="px-4 py-3 text-sm">
@@ -55,6 +106,7 @@ const Table = props => {
                                                 {props.role === 'student' && <p>{data.gender}</p>}
                                                 {props.role === 'clss' && <p>{data.gender}</p>}
                                                 {props.role === 'assignment' && <p className="font-semibold">{data.solutions?.length}</p>}
+                                                {props.role === 'attendance' && <a className="font-semibold text-blue-500 cursor-pointer" onClick={() => getStudents(data.students)}>{data.students.length}</a>}
                                             </td>
                                             <td className="px-4 py-3">
                                                 <div className="flex items-center space-x-4 text-sm">

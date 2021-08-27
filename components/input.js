@@ -35,7 +35,6 @@ export const Select = props => {
             >
                 <select
                     onChange={props.onChange}
-                    defaultValue=''
                     value={props.value}
                     className="block w-full pl-10 py-4 rounded mt-1 text-sm border text-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input"
                 >
