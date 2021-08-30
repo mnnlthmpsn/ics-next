@@ -87,3 +87,19 @@ export const take_attendance = async payload => {
         throw err
     }
 }
+
+export const all_announcements = async () => {
+    try {
+        return await axios.get(`${apiURL}/announcements`)
+    } catch (err) {
+        throw err
+    }
+}
+
+export const add_announcement = async payload => {
+    try {
+        return await axios.post(`${apiURL}/announcements`, payload)
+    } catch (err) {
+        throw err
+    }
+}

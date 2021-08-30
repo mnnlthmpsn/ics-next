@@ -6,6 +6,7 @@ import { showToast } from "../../components/helpers"
 import { Input, Select } from "../../components/input"
 import Modal from "../../components/modal"
 import Navbar from "../../components/navbar"
+import SideBar from "../../components/sidebar"
 import { ModalContext } from "../../contexts/modalContext"
 
 const Clss = () => {
@@ -79,6 +80,7 @@ const Clss = () => {
     return (
         <Fragment>
             <Navbar />
+            <SideBar menu='classes' />
             {open &&
                 <Modal open={open} title='Add Class'>
                     <form className="grid grid-cols gap-6 py-5" onSubmit={addClass}>
@@ -114,7 +116,6 @@ const Clss = () => {
             }
             <div className="container">
             <BreadCrumb currentPage='Classes' prevPage='Dashboard' prevLink='/dashboard' />
-            <div className="container">
                 <div className="flex items-center justify-between mb-6">
                     <p className="text-gray-500 font-bold mb-2">Classes</p>
                     <button onClick={open_modal}
@@ -123,16 +124,15 @@ const Clss = () => {
                         Add Class
                     </button>
                 </div>
-                <div className="grid grid-cols md:grid-cols-3 lg:grid-cols-5 gap-2 place-items-center mb-12">
+                <div className="grid grid-cols md:grid-cols-3 lg:grid-cols-3 gap-2 place-items-center mb-12">
                     {
                         allClasses.length > 0
                             ? allClasses.map((clss, index) => (
-                                <ClassCard teacher={`${clss.teacher.firstname} ${clss.teacher.lastname}`} clss={clss.title} key={index} id={clss.id}/>
+                                <ClassCard teacher={`${clss.teacher.firstname} ${clss.teacher.lastname}`} clss={clss.title} key={index} id={clss.id} />
                             ))
                             : <p className="text-center mt-2">Classes haven't been added</p>
                     }
                 </div>
-            </div>
             </div>
         </Fragment>
     )

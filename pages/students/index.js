@@ -7,6 +7,7 @@ import BreadCrumb from "../../components/breadcrumb"
 import Navbar from "../../components/navbar"
 import Table from "../../components/table"
 import { get_all_students } from "../../api/student"
+import SideBar from "../../components/sidebar"
 
 
 const Student = () => {
@@ -38,6 +39,7 @@ const Student = () => {
         <Fragment>
             <Navbar />
             <div className="container">
+                <SideBar menu='students' />
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Students' prevPage='Dashboard' prevLink='/dashboard' />
                     <div className="mt-28 mr-10">

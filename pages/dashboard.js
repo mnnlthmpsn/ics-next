@@ -28,10 +28,10 @@ const Dashboard = () => {
 
     const getParentCount = async () => {
         try {
-           const res = await get_parent_count() 
-           res.status === 200 & (
-            setParentCount(res.data)
-        )
+            const res = await get_parent_count()
+            res.status === 200 & (
+                setParentCount(res.data)
+            )
         } catch (err) {
             showToast('error', 'An error occured getting Parent Count')
         }
@@ -39,13 +39,13 @@ const Dashboard = () => {
 
     const getTeacherCount = async () => {
         try {
-            const res = await get_teacher_count() 
+            const res = await get_teacher_count()
             res.status === 200 & (
-             setTeacherCount(res.data)
-         )
-         } catch (err) {
-             showToast('error', 'An error occured getting Parent Count')
-         }
+                setTeacherCount(res.data)
+            )
+        } catch (err) {
+            showToast('error', 'An error occured getting Parent Count')
+        }
     }
 
     useEffect(() => {
@@ -161,36 +161,23 @@ const Dashboard = () => {
                         />
 
                         {/* Attendance */}
-                        <NavMain 
+                        <NavMain
                             title='Attendance'
                             path='/attendance'
-                            icon = {
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32" viewBox="0 0 20 20" fill="currentColor">
-  <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-</svg>
-                            }
-                        />
-
-                        {/* X-Curicular Activities */}
-                        <NavMain
-                            title='X-Curicular Activities'
-                            path='/students'
                             icon={
-                                <svg className="h-32 w-32"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                                 </svg>
                             }
                         />
 
-                        {/* Settings */}
+                        {/* Announcements */}
                         <NavMain
-                            title='Settings'
-                            path='/students'
+                            title='Announcements'
+                            path='/announcements'
                             icon={
-                                <svg className="h-32 w-32"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
                                 </svg>
                             }
                         />

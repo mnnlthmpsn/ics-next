@@ -7,6 +7,7 @@ import BreadCrumb from "../../components/breadcrumb"
 import { showToast } from "../../components/helpers"
 import { Button, Input, Select } from "../../components/input"
 import Navbar from "../../components/navbar"
+import SideBar from "../../components/sidebar"
 
 const TakeAttendance = () => {
 
@@ -91,6 +92,7 @@ const TakeAttendance = () => {
     return (
         <Fragment>
             <Navbar />
+            <SideBar menu='attendance' />
             <div className="container">
                 <BreadCrumb currentPage='Take Attendance' prevPage='Dashboard' prevLink='/dashboard' />
                 <form className="grid md:grid-cols-2 gap-4" onSubmit={takeAttendance}>

@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar"
 import Table from "../../components/table"
 import { showToast } from "../../components/helpers"
 import Link from "next/link"
+import SideBar from "../../components/sidebar"
 
 const Attendance = () => {
 
@@ -28,6 +29,7 @@ const Attendance = () => {
     return (
         <Fragment>
             <Navbar />
+            <SideBar menu='attendance' />
             <div className="container ">
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Attendance' prevPage='Dashboard' prevLink='/dashboard' />

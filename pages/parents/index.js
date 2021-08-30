@@ -7,6 +7,7 @@ import BreadCrumb from "../../components/breadcrumb"
 import Navbar from "../../components/navbar"
 import Table from "../../components/table"
 import { get_all_parents } from "../../api/guardian"
+import SideBar from "../../components/sidebar"
 
 
 const Parent = () => {
@@ -37,6 +38,7 @@ const Parent = () => {
     return (
         <Fragment>
             <Navbar />
+            <SideBar menu='parents' />
             <div className="container">
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Parents' prevPage='Dashboard' prevLink='/dashboard' />

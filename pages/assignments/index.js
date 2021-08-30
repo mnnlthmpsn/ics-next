@@ -7,6 +7,7 @@ import { get_all_classes, get_assignments, upload_assignment } from "../../api/t
 import { ModalContext } from '../../contexts/modalContext'
 import Modal from "../../components/modal"
 import { Button, Select } from "../../components/input"
+import SideBar from "../../components/sidebar"
 
 const Assignments = () => {
 
@@ -106,6 +107,7 @@ const Assignments = () => {
             }
             <Navbar />
             <div className="container">
+                <SideBar menu='assignments' />
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Assignments' prevPage='Dashboard' prevLink='/dashboard' />
                     <div className="mt-28 mr-10">

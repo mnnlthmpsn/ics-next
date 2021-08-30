@@ -6,6 +6,7 @@ import { get_class, upload_assignment } from "../../api/teacher"
 import { ModalContext } from "../../contexts/modalContext"
 import Modal from "../../components/modal"
 import { showToast } from "../../components/helpers"
+import SideBar from "../../components/sidebar"
 
 const ContactDetail = ({ query }) => {
 
@@ -57,6 +58,7 @@ const ContactDetail = ({ query }) => {
     return (
         <Fragment>
             <Navbar />
+            <SideBar menu='classes' />
             {open &&
                 <Modal open={open} title='Upload Assignment'>
                     <form className="grid grid-cols gap-6 py-5" onSubmit={uploadAssignment}>

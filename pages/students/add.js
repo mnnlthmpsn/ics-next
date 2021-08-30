@@ -10,6 +10,7 @@ import Navbar from "../../components/navbar"
 import { ModalContext } from "../../contexts/modalContext"
 import { addGuardianController } from "../../controllers/guardianController"
 import { addStudentController } from "../../controllers/studentController"
+import SideBar from "../../components/sidebar"
 
 const AddStudent = () => {
 
@@ -186,8 +187,9 @@ const AddStudent = () => {
             }
             <Navbar />
             <div className="container">
+                <SideBar menu='students' />
                 <BreadCrumb currentPage='Add Student' prevPage='Students' prevLink='/students' />
-                <div className="lg:container">
+                <div>
                     <form className="form mb-10 p-10 border rounded-lg bg-gray-50 shadow-sm" onSubmit={handleStudentSubmit}>
                         <p className="text-gray-400 font-bold">Add Student</p>
                         <div className="grid grid-cols lg:grid-cols-2 gap-6 py-5">
