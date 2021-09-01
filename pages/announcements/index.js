@@ -74,7 +74,7 @@ const Announcements = () => {
             <div className="container relative mb-5">
                 <BreadCrumb currentPage='Announcements' prevPage='Dashboard' prevLink='/dashboard' />
                 <div className="flex items-center justify-between mb-6">
-                    <p className="text-gray-500 font-bold mb-2">Classes</p>
+                    <p className="text-gray-500 font-bold mb-2">Announcements</p>
                     <button onClick={open_modal}
                         className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-400 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue"
                     >

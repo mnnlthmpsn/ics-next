@@ -6,7 +6,7 @@ const apiURL = process.env.NODE_ENV == 'production'
 
 export const get_all_teachers = async () => {
     try {
-        return await axios.get(`${apiURL}/users?is_teacher=true`)
+        return await axios.get(`${apiURL}/users?user_role=teacher`)
     } catch (err) {
         throw err
     }

@@ -32,7 +32,7 @@ const AddStudent = () => {
         email: '',
         phone: '',
         firstname: '',
-        lastname: ''
+        lastname: '',
     })
 
     const [currentModal, setCurrentModal] = useState('1')

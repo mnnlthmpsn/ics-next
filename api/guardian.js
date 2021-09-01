@@ -6,7 +6,7 @@ const apiURL = process.env.NODE_ENV == 'production'
 
 export const get_all_parents = async () => {
     try {
-        const res = await axios.get(`${apiURL}/users?is_teacher=false`)
+        const res = await axios.get(`${apiURL}/users?user_role=parent`)
         return res
     } catch (err) {
         throw err
@@ -15,7 +15,7 @@ export const get_all_parents = async () => {
 
 export const get_parent = async email => {
     try {
-        const res = await axios.get(`${apiURL}/users?is_teacher=false&email=${email}`)
+        const res = await axios.get(`${apiURL}/users?user_role=parent&email=${email}`)
         return res
     } catch (err) {
         
@@ -24,7 +24,7 @@ export const get_parent = async email => {
 
 export const get_parent_count = async () => {
     try {
-        const res = await axios.get(`${apiURL}/users/count?is_teacher=false`)
+        const res = await axios.get(`${apiURL}/users/count?user_role=parent`)
         return res
     } catch (err) {
         throw err
@@ -33,7 +33,7 @@ export const get_parent_count = async () => {
 
 export const get_teacher_count = async () => {
     try {
-        const res = await axios.get(`${apiURL}/users/count?is_teacher=true`)
+        const res = await axios.get(`${apiURL}/users/count?user_role=teacher`)
         return res
     } catch (err) {
         throw err

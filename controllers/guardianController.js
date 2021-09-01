@@ -16,7 +16,7 @@ export const addGuardianController = async guardian => {
             password: guardian.phone,
             firstname: guardian.firstname,
             lastname: guardian.lastname,
-            is_teacher: false
+            user_role: 'parent'
         }
 
         // check if parent exists

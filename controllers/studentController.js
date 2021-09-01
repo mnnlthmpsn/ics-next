@@ -1,3 +1,4 @@
+import { signup } from "../api/base"
 import { get_parent } from "../api/guardian"
 import { add_student } from "../api/student"
 import { showToast } from "../components/helpers"
@@ -54,17 +55,37 @@ const finalizeSignUp = async data => {
             parents.push(res.data[0])
         }
 
-        const payload = {
-            teacher: data.teacher,
-            parents: parents,
-            firstname: data.firstname,
-            lastname: data.lastname,
-            gender: data.gender,
-            clss: data.class,
-            age: data.age
+        let email = `${data?.lastname.toLowerCase()}.${data?.firstname.toLowerCase()}@ics.com`
+        let username = `${data?.lastname.toLowerCase()}.${data?.firstname.toLowerCase()}`
+        let password = `${data?.lastname.toLowerCase()}.${data?.firstname.toLowerCase()}`
+
+        const stud_payload = {
+            email: email,
+            username: username,
+            phone: '0540609437',
+            password: password,
+            firstname: data?.firstname,
+            lastname: data?.lastname,
+            user_role: 'student'
         }
+
+        const user_res = await signup(stud_payload)
+        console.log(user_res)
+
+        const payload = {
+            parents: parents,
+            firstname: data?.firstname,
+            lastname: data?.lastname,
+            gender: data?.gender,
+            clss: data?.class,
+            age: data?.age,
+            profile: user_res?.data?.user?.id.toString()
+        }
+
         return await add_student(payload)
+
     } catch (err) {
+        console.error(err)
         showToast('error', 'An error occured adding Student')
     }
 }
