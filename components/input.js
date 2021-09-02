@@ -13,6 +13,7 @@ export const Input = props => {
                         onChange={props.onChange}
                         value={props.value}
                         readOnly={props.readOnly || false}
+                        required={props.required || false}
                     />
                     <div
                         className="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
