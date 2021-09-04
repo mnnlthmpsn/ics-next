@@ -45,6 +45,14 @@ export const upload_assignment = async fd => {
     }
 }
 
+export const upload_report = async fd => {
+    try {
+        return await axios.post(`${apiURL}/reports`, fd)
+    } catch (err) {
+        throw err
+    }
+}
+
 export const get_assignments = async () => {
     try {
         return await axios.get(`${apiURL}/assignments`)

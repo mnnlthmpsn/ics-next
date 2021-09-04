@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { Fragment, useState } from "react"
 import { get_blk_students } from "../api/student"
@@ -77,7 +78,8 @@ const Table = props => {
                                                 <div className="flex items-center text-sm">
                                                     <div>
                                                         {props.role === 'parent' && <p className="font-semibold">{data.firstname}</p>}
-                                                        {props.role === 'student' && <p className="font-semibold">{data.firstname}</p>}
+                                                        {props.role === 'student' && <Link href={`/students/${data.id}`}>
+                                                        <p className="font-semibold text-blue-500 cursor-pointer hover:underline">{data.firstname}</p></Link>}
                                                         {props.role === 'clss' && <p className="font-semibold">{data.firstname}</p>}
                                                         {props.role === 'assignment' && <p className="font-semibold">{data.class.title}</p>}
                                                         {props.role === 'dept' && <p className="font-semibold">{data.title}</p>}
@@ -97,7 +99,7 @@ const Table = props => {
                                                 props.role !== 'clss' && <td className="px-4 py-3 text-sm">
                                                     {props.role === 'parent' && <p>{data.email}</p>}
                                                     {props.role === 'student' && <p>{data.clss.title}</p>}
-                                                    {props.role === 'assignment' && <a href={`${data?.assignment[0].url}`} className="font-semibold text-blue-500" download>{data?.assignment[0]?.name}</a>}
+                                                    {props.role === 'assignment' && <a href={`${data?.assignment[0]?.url}`} target="_blank" className="font-semibold text-blue-500" download>{data?.assignment[0]?.name}</a>}
                                                     {props.role === 'attendance' && <p className="font-semibold">{data.description}</p>}
                                                 </td>
                                             }

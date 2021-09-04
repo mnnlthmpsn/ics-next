@@ -1,7 +1,8 @@
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect, useState, useContext } from "react"
 import { useRouter } from "next/router"
 import Link from 'next/link'
 import { showToast } from '../../components/helpers'
+
 
 import BreadCrumb from "../../components/breadcrumb"
 import Navbar from "../../components/navbar"
@@ -26,7 +27,6 @@ const Student = () => {
     const getAllStudents = async () => {
         try {
             const res = await get_all_students()
-            console.log(res.data)
             setAllStudents(res.data)
         } catch (err) {
             showToast('error', err.message)
@@ -38,13 +38,13 @@ const Student = () => {
     return (
         <Fragment>
             <Navbar />
-            <div className="container">
+            <div className="container p-5 md:pl-40">
                 <SideBar menu='students' />
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Students' prevPage='Dashboard' prevLink='/dashboard' />
-                    <div className="mt-28 mr-10">
+                    <div className="my-24 md:mt-28 ">
                         <Link href='/students/add'>
-                            <button className="border border-blue-500 text-blue-700 bg-blue-200 py-2 px-4 rounded-lg hover:animate-pulse">Add Student</button>
+                            <button className="border border-blue-500 text-blue-700 bg-blue-200 py-2 px-4 rounded-lg">Add Student</button>
                         </Link>
                     </div>
                 </div>

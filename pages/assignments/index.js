@@ -75,6 +75,7 @@ const Assignments = () => {
         <Fragment>
             {open &&
                 <Modal open={open} title='Upload Assignment'>
+                    <p className="font-bold text-red-400 text-sm text-center">uploaded files must be in "jpeg, jpg or png formats"</p>
                     <form onSubmit={uploadAssignment}>
                         <div className="grid grid-cols gap-6 py-5">
                             <Select
@@ -91,7 +92,7 @@ const Assignments = () => {
                             />
 
                             <label className="text-gray-400 font-bold">Choose File</label>
-                            <input type="file" className='border-4 py-12 px-2 rounded-lg border-dashed' onChange={handleChange} />
+                            <input type="file" accept="image/png, image/jpg, image/jpeg" className='border-4 py-12 px-2 rounded-lg border-dashed' onChange={handleChange} />
                         </div>
                         <div className="flex justify-end">
                             {/* modal button */}

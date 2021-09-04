@@ -43,3 +43,19 @@ export const get_blk_students = async query => {
         throw err
     }
 }
+
+export const get_student = async student_id => {
+    try {
+        return await axios.get(`${apiURL}/students/${student_id}`)
+    } catch (err) {
+        throw err
+    }
+}
+
+export const get_student_reports = async student_id => {
+    try {
+        return await axios.get(`${apiURL}/reports?student.id=${student_id}`)
+    } catch (error) {
+        throw error
+    }
+}

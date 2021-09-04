@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react"
 import { add_comment, get_all_comments } from "../../api/base"
 import BreadCrumb from "../../components/breadcrumb"
 import { showToast } from "../../components/helpers"
-import { Button, Input } from "../../components/input"
+import { Input } from "../../components/input"
 import Navbar from '../../components/navbar'
 import SideBar from "../../components/sidebar"
 

@@ -4,7 +4,7 @@ import Link from 'next/link'
 const BreadCrumb = props => {
     return (
         <Fragment>
-            <div className="flex mb-10 mt-28">
+            <div className="flex md:mb-10 mt-28">
                 <Link href={props.prevLink}>
                 <p className="underline text-blue-400 cursor-pointer">{props.prevPage}</p>
                 </Link>

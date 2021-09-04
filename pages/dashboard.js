@@ -62,7 +62,7 @@ const Dashboard = () => {
     return (
         <Fragment>
             <Navbar />
-            <div className="container">
+            <div className="container p-5 md:pl-20">
                 {/* information center */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 place-items-center mb-10 mt-32">
                     <div className="flex items-center w-full rounded-lg p-4 border border-blue-200 text-sm lg:text-lg">
