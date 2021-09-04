@@ -88,7 +88,7 @@ const StudentDetail = ({ query }) => {
         <Navbar />
         <div className="container p-5 md:pl-32">
             <SideBar menu='assignments' />
-            <BreadCrumb currentPage='Students' prevPage='Dashboard' prevLink='/dashboard' />
+            <BreadCrumb currentPage='Student Details' prevPage='Student' prevLink='/students' />
             <div className="flex flex-col items-center">
                 <div className="rounded-full my-8 md:my-0 border-2 p-5 w-24 h-24 flex self-center items-center justify-center">
                     <p className="italic text-gray-400">profile</p>
