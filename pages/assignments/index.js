@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar"
 import BreadCrumb from "../../components/breadcrumb"
 import Table from '../../components/table'
 import { showToast } from "../../components/helpers"
-import { get_all_classes, get_assignments, upload_assignment } from "../../api/teacher"
+import { get_all_classes, get_assignments, get_classes_for_teacher, upload_assignment } from "../../api/teacher"
 import { ModalContext } from '../../contexts/modalContext'
 import Modal from "../../components/modal"
 import { Button, Select } from "../../components/input"
@@ -17,12 +17,13 @@ const Assignments = () => {
     const [file, setFile] = useState(false)
     const [classes, setClasses] = useState([])
     const [selectedClass, setSelectedClass] = useState('')
+    const [currentUser, setCurrentUser] = useState({})
     const HEADINGS = ['Class', 'Overdue', 'File', 'Solutions']
 
 
     useEffect(() => {
         getAllAssignments()
-        getClasses()
+        getCurrentUser()
     }, [])
 
     const getAllAssignments = async () => {
@@ -34,18 +35,28 @@ const Assignments = () => {
         }
     }
 
-    const getClasses = async () => {
+    const getClasses = async (id='') => {
         try {
-            const tempClass = await get_all_classes()
-            if (tempClass.status === 200) {
+            const tempClss = id === '' ? await get_all_classes() : await get_classes_for_teacher(id)
+            if (tempClss.status === 200) {
                 const temp = []
-                tempClass.data.map(clss => {
-                    temp.push({ key: clss.title, value: clss.id })
+                tempClss.data.map(clss => {
+                    temp.push({ key: `${clss.title}`, value: clss.id })
                 })
                 setClasses(temp)
             }
         } catch (err) {
             showToast('error', err.message)
+        }
+    }
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+            user.user_role === 'admin' ? getClasses() : getClasses(user.id.toString())
+        } catch (err) {
+            // an err occured
         }
     }
 

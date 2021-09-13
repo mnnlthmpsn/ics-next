@@ -22,6 +22,7 @@ const Home = () => {
 
       const res = await login(user)
       res.status === 200 && (
+        console.log(res),
         router.push('/dashboard'),
         showToast('success', `Welcome ${user.identifier}`)
       )

@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from "react"
-import { add_class, get_all_classes, get_all_teachers } from "../../api/teacher"
+import { add_class, get_all_classes, get_all_teachers, get_classes_for_teacher } from "../../api/teacher"
 import BreadCrumb from "../../components/breadcrumb"
 import ClassCard from "../../components/classCard"
 import { showToast } from "../../components/helpers"
@@ -12,6 +12,7 @@ import { ModalContext } from "../../contexts/modalContext"
 const Clss = () => {
 
     const { open, open_modal, close_modal } = useContext(ModalContext)
+    const [currentUser, setCurrentUser] = useState({})
     const [allClasses, setAllClasses] = useState([])
     const [teachers, setTeachers] = useState([])
     const [clss, setClass] = useState({
@@ -20,16 +21,26 @@ const Clss = () => {
     })
 
     useEffect(() => {
-        getClasses()
-        getTeachers()
+        getCurrentUser()
+        
     }, [])
 
-    const getClasses = async () => {
+    const getClasses = async (id='') => {
         try {
-            const res = await get_all_classes()
+            const res = id === '' ? await get_all_classes() : await get_classes_for_teacher(id)
             setAllClasses(res.data)
         } catch (err) {
             showToast('error', err.message)
+        }
+    }
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+            user.user_role === 'admin' ? getClasses() : getClasses(user.id.toString())
+        } catch (err) {
+            // an err occured
         }
     }
 
@@ -114,12 +125,12 @@ const Clss = () => {
                     </form>
                 </Modal>
             }
-            <div className="container">
+            <div className="container mx-5 md:mx-0">
             <BreadCrumb currentPage='Classes' prevPage='Dashboard' prevLink='/dashboard' />
                 <div className="flex items-center justify-between mb-6">
                     <p className="text-gray-500 font-bold mb-2">Classes</p>
                     <button onClick={open_modal}
-                        className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-400 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue"
+                        className={`${currentUser.user_role === 'admin' ? 'block' : 'hidden'} w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-400 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue`}
                     >
                         Add Class
                     </button>

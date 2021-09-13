@@ -14,6 +14,7 @@ const Dashboard = () => {
     const [studentCount, setStudentCount] = useState(0)
     const [parentCount, setParentCount] = useState(0)
     const [teacherCount, setTeacherCount] = useState(0)
+    const [currentUser, setCurrentUser] = useState({})
 
     const getStudentCount = async () => {
         try {
@@ -23,6 +24,15 @@ const Dashboard = () => {
             )
         } catch (err) {
             showToast('error', 'An error occured getting Student Count')
+        }
+    }
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+        } catch (err) {
+            // an err occured
         }
     }
 
@@ -53,7 +63,7 @@ const Dashboard = () => {
         // if jwt isn't found
         const jwt = sessionStorage.getItem('auth')
         !jwt && router.replace('/')
-
+        getCurrentUser()
         getStudentCount()
         getParentCount()
         getTeacherCount()
@@ -64,7 +74,7 @@ const Dashboard = () => {
             <Navbar />
             <div className="container p-5 md:pl-20">
                 {/* information center */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 place-items-center mb-10 mt-32">
+                <div className={`grid grid-cols-2 lg:grid-cols-4 gap-6 place-items-center mb-10 mt-32 ${currentUser.user_role === 'admin' || currentUser.user_role === 'teacher' ? '' : 'hidden'}`}>
                     <div className="flex items-center w-full rounded-lg p-4 border border-blue-200 text-sm lg:text-lg">
                         <svg className="h-10 w-10 text-blue-400"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -79,7 +89,7 @@ const Dashboard = () => {
                         </svg>
                         <p className="ml-10 font-bold text-green-500">{parentCount} Parents</p>
                     </div>
-                    <div className="flex items-center w-full rounded-lg p-4 border border-red-200 text-sm lg:text-lg">
+                    <div className="flex items-center w-full rounded-lg p-4 border border-red-200 text-sm lg:text-lg" >
                         <svg className="h-10 w-10 text-red-400"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -98,11 +108,12 @@ const Dashboard = () => {
                 </div>
 
                 {/* actions */}
-                <div className="border-2 border-dotted rounded-xl bg-gray-50 my-10">
+                <div className={`border-2 border-dotted rounded-xl bg-gray-50 my-10 ${currentUser.user_role === 'admin' || currentUser.user_role === 'teacher' ? '' : 'mt-24'}`}>
                     <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-4 gap-y-10 p-16 place-items-center">
 
                         {/* Students */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'student' && <NavMain
                             title='Students'
                             path='/students'
                             icon={
@@ -112,9 +123,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Parents */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'parent' && currentUser.user_role !== 'student' && <NavMain
                             title='Parents'
                             path='/parents'
                             icon={
@@ -124,9 +137,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Assignments */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'parent'  && <NavMain
                             title='Assignments'
                             path='/assignments'
                             icon={
@@ -136,9 +151,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Departments */}
-                        <NavMain
+                        {
+                            currentUser.user_role === 'admin' && currentUser.user_role !== 'parent' && currentUser.user_role !== 'student' && <NavMain
                             title='Departments'
                             path='/departments'
                             icon={
@@ -148,9 +165,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Classes */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'parent' && <NavMain
                             title='Classes'
                             path='/classes'
                             icon={
@@ -160,9 +179,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Attendance */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'parent' && currentUser.user_role !== 'student' && <NavMain
                             title='Attendance'
                             path='/attendance'
                             icon={
@@ -171,9 +192,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Announcements */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'parent' && <NavMain
                             title='Announcements'
                             path='/announcements'
                             icon={
@@ -182,9 +205,11 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
 
                         {/* Comments */}
-                        <NavMain
+                        {
+                            currentUser.user_role !== 'parent' && <NavMain
                             title='Comments'
                             path='/comments'
                             icon={
@@ -193,6 +218,7 @@ const Dashboard = () => {
                                 </svg>
                             }
                         />
+                        }
                     </div>
                 </div>
             </div>

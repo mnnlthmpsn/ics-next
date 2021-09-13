@@ -2,7 +2,7 @@ import { Switch } from "@headlessui/react"
 import { useRouter } from "next/router"
 import { Fragment, useEffect, useState } from "react"
 import { get_all_students, get_all_students_for_class } from "../../api/student"
-import { get_all_classes, take_attendance } from "../../api/teacher"
+import { get_all_classes, get_classes_for_teacher, take_attendance } from "../../api/teacher"
 import BreadCrumb from "../../components/breadcrumb"
 import { showToast } from "../../components/helpers"
 import { Button, Input, Select } from "../../components/input"
@@ -19,6 +19,7 @@ const TakeAttendance = () => {
     const [attendance, setAttendance] = useState([])
     const [date, setDate] = useState('')
     const [description, setDescription] = useState('')
+    const [currentUser, setCurrentUser] = useState({})
 
     const testData = ['Joe', 'Kobby', 'Ama']
 
@@ -48,9 +49,9 @@ const TakeAttendance = () => {
         }
     }
 
-    const getAllClasses = async () => {
+    const getClasses = async (id='') => {
         try {
-            const tempClss = await get_all_classes()
+            const tempClss = id === '' ? await get_all_classes() : await get_classes_for_teacher(id)
             if (tempClss.status === 200) {
                 const temp = []
                 tempClss.data.map(clss => {
@@ -60,6 +61,16 @@ const TakeAttendance = () => {
             }
         } catch (err) {
             showToast('error', err.message)
+        }
+    }
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+            user.user_role === 'admin' ? getClasses() : getClasses(user.id.toString())
+        } catch (err) {
+            // an err occured
         }
     }
 
@@ -85,8 +96,7 @@ const TakeAttendance = () => {
     useEffect(() => {
         const today = new Date().toISOString().slice(0, 10)
         setDate(today)
-
-        getAllClasses()
+        getCurrentUser()
     }, [])
 
     return (

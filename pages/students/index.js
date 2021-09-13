@@ -33,6 +33,19 @@ const Student = () => {
         }
     }
 
+    const searchStudent = e => {
+        if (e.target.value == '') {
+          getAllStudents()
+        } else {
+          var nw = allStudents.filter(
+            (student) =>
+              student.firstname.toUpperCase().includes(e.target.value.toUpperCase()) ||
+              student.lastname.toUpperCase().includes(e.target.value.toUpperCase())
+          );
+          setAllStudents(nw)
+        }
+      }
+
     const HEADINGS = ['Firstname', 'Lastname', 'Class', 'Gender']
 
     return (
@@ -42,12 +55,13 @@ const Student = () => {
                 <SideBar menu='students' />
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Students' prevPage='Dashboard' prevLink='/dashboard' />
-                    <div className="my-24 md:mt-28 ">
+                    <div className="mt-28">
                         <Link href='/students/add'>
                             <button className="border border-blue-500 text-blue-700 bg-blue-200 py-2 px-4 rounded-lg">Add Student</button>
                         </Link>
                     </div>
                 </div>
+                <input type="text" onChange={searchStudent} placeholder="Search Student" className="block w-1/2 p-4 my-2 rounded mt-1 text-sm border text-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input"/>
                 <Table data={allStudents} headings={HEADINGS} role='student' />
             </div>
         </Fragment>

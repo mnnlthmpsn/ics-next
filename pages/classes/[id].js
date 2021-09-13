@@ -16,11 +16,13 @@ const ContactDetail = ({ query }) => {
     const [clss, setClass] = useState({})
     const [students, setStudents] = useState([])
     const [file, setFile] = useState(false)
+    const [currentUser, setCurrentUser] = useState({})
 
     const HEADINGS = ['Firstname', 'Lastname', 'Gender']
 
     useEffect(() => {
         getClassDetails()
+        getCurrentUser()
     }, [])
 
     const getClassDetails = async () => {
@@ -30,6 +32,15 @@ const ContactDetail = ({ query }) => {
             setStudents(res.data.students)
         } catch (err) {
             showToast('error', err.message)
+        }
+    }
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+        } catch (err) {
+            // an err occured
         }
     }
 
@@ -98,7 +109,7 @@ const ContactDetail = ({ query }) => {
                 </div>
                 <div className="flex item-center justify-between px-4 py-2 bg-gray-50 border mt-2 rounded-t-lg">
                     <p className="text-gray-400 font-bold">{clss.title} Students</p>
-                    <p><span className="text-gray-400 font-bold">Teacher</span>: Jojo Jojo</p>
+                    <p><span className="text-gray-400 font-bold">Teacher</span>: {`${currentUser.firstname} ${currentUser.lastname}`}</p>
                 </div>
                 <Table data={students} headings={HEADINGS} role='clss' />
             </div>

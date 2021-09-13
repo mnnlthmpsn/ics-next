@@ -23,11 +23,19 @@ export const add_class = async payload => {
 
 export const get_all_classes = async () => {
     try {
-        return await axios.get(`${apiURL}/clsses`)
+        return await axios.get(`${apiURL}/clsses?_sort=title:ASC`)
     } catch (err) {
         throw err
     }
 } 
+
+export const get_classes_for_teacher = async tid => {
+    try {
+        return await axios.get(`${apiURL}/clsses?teacher.id=${tid}&_sort=title:ASC`)
+    } catch (err) {
+        throw err
+    }
+}
 
 export const get_class = async class_id => {
     try {
