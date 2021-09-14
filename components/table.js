@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { get_blk_students } from "../api/student"
 import { showToast } from "./helpers"
 
@@ -8,6 +8,7 @@ const Table = props => {
 
     const [open, setOpen] = useState(false)
     const [students, setStudents] = useState([])
+    const [user, setCurrentUser] = useState({})
     const router = useRouter()
 
     const getStudents = async studs => {
@@ -26,6 +27,20 @@ const Table = props => {
             showToast('error', err.messasge)
         }
     }
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+            user.user_role === 'admin' ? getAllStudents() : getAllStudentsForParents(user.id.toString())
+        } catch (err) {
+            // an err occured
+        }
+    }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
 
     return (
         <Fragment>
@@ -111,7 +126,7 @@ const Table = props => {
                                                 {props.role === 'attendance' && <a className="font-semibold text-blue-500 cursor-pointer" onClick={() => getStudents(data.students)}>{data.students.length}</a>}
                                             </td>
                                             <td className="px-4 py-3">
-                                                <div className="flex items-center space-x-4 text-sm">
+                                                <div className={`flex items-center space-x-4 text-sm ${user.user_role === 'parent' ? 'hidden' : ''}`}>
                                                     <button
                                                         className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                         aria-label="Edit"
@@ -145,7 +160,12 @@ const Table = props => {
                                                         </svg>
                                                     </button>
                                                 </div>
-                                            </td>
+                                                <div className={`text-sm ${user.user_role === 'parent' ? '' : 'hidden'}`}>
+                                                    <button className="border border-blue-500 text-blue-700 bg-blue-200 py-2 px-4 rounded-lg">
+                                                        Details
+                                                    </button>
+                                                </div>
+                                          </td>
                                         </tr>
                                     ))
                                     : <tr>

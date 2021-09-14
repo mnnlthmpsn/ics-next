@@ -9,20 +9,41 @@ import Navbar from "../../components/navbar"
 import Table from "../../components/table"
 import { get_all_students } from "../../api/student"
 import SideBar from "../../components/sidebar"
+import { get_students_for_parent } from "../../api/guardian"
 
 
 const Student = () => {
 
     const router = useRouter()
     const [allStudents, setAllStudents] = useState([])
+    const [user, setCurrentUser] = useState({})
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+            user.user_role === 'admin' ? getAllStudents() : getAllStudentsForParents(user.id.toString())
+        } catch (err) {
+            // an err occured
+        }
+    }
 
     useEffect(() => {
         // if jwt isn't found
         const jwt = sessionStorage.getItem('auth')
         !jwt && router.replace('/')
 
-        getAllStudents()
+        getCurrentUser()
     }, [])
+
+    const getAllStudentsForParents = async id => {
+        try {
+            const res = await get_students_for_parent(id)
+            setAllStudents(res.data)
+        } catch (err) {
+            throw err
+        }
+    }
 
     const getAllStudents = async () => {
         try {
@@ -55,7 +76,7 @@ const Student = () => {
                 <SideBar menu='students' />
                 <div className="flex justify-between">
                     <BreadCrumb currentPage='Students' prevPage='Dashboard' prevLink='/dashboard' />
-                    <div className="mt-28">
+                    <div className={`mt-28 ${user.user_role === 'admin' || user.user_role === 'teacher' ? '' : 'hidden'}`}>
                         <Link href='/students/add'>
                             <button className="border border-blue-500 text-blue-700 bg-blue-200 py-2 px-4 rounded-lg">Add Student</button>
                         </Link>

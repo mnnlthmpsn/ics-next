@@ -13,6 +13,14 @@ export const get_all_parents = async () => {
     }
 }
 
+export const get_students_for_parent = async pid => {
+    try {
+        return await axios.get(`${apiURL}/students?parents.id_in=${pid}`)
+    } catch (err) {
+        throw err
+    }
+}
+
 export const get_parent = async email => {
     try {
         const res = await axios.get(`${apiURL}/users?user_role=parent&email=${email}`)

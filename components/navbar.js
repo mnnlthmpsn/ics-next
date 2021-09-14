@@ -1,6 +1,25 @@
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 const Navbar = () => {
+
+    const [user, setCurrentUser] = useState({})
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            console.log(user)
+            setCurrentUser(user)
+            
+        } catch (err) {
+            // an err occured
+        }
+    }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
+
     return (
         <div className="border-b-2 fixed bg-white inset-x-0 px-10 top-0 z-10">
             <div className="max-w-6xl mx-auto flex justify-between items-center py-5">
@@ -12,8 +31,9 @@ const Navbar = () => {
                         <p className="ml-2 font-bold">ICS</p>
                     </a>
                 </Link>
-                <div></div>
-                <div>
+                <div className="inline-flex space-x-5 items-center">
+                    <p className="hidden md:block text-lg font-bold text-gray-400">{`${user.firstname} ${user.lastname}`}</p>
+                    <p className="hidden md:block text-lg font-bold text-gray-400">|</p>
                     <Link href='/'>
                         <a className="flex text-gray-400 hover:text-gray-600">
                             <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
