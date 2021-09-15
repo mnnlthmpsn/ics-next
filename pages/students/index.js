@@ -10,6 +10,7 @@ import Table from "../../components/table"
 import { get_all_students } from "../../api/student"
 import SideBar from "../../components/sidebar"
 import { get_students_for_parent } from "../../api/guardian"
+import { get_teacher, get_teacher_class } from "../../api/teacher"
 
 
 const Student = () => {
@@ -22,10 +23,23 @@ const Student = () => {
         try {
             const user = JSON.parse(sessionStorage.getItem('user'))
             setCurrentUser(user)
-            user.user_role === 'admin' ? getAllStudents() : getAllStudentsForParents(user.id.toString())
+
+            if (user.user_role === 'admin' || user.user_role === 'teacher') {
+                getAllStudents()
+            } 
+            
+            if (user.role === 'parent') {
+                getAllStudentsForParents(user.id.toString())
+            } 
         } catch (err) {
             // an err occured
         }
+    }
+
+    const getAllStudentsForClass = async id => {
+        // get particular teacher
+        const clss = await get_teacher_class(id)
+        console.log(clss)
     }
 
     useEffect(() => {

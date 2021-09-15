@@ -29,6 +29,14 @@ export const get_all_classes = async () => {
     }
 } 
 
+export const get_teacher_class = async tid => {
+    try {
+       return await axios.get(`${apiURL}/clsses?teacher.id=${tid}`) 
+    } catch (err) {
+        throw err
+    }
+}
+
 export const get_classes_for_teacher = async tid => {
     try {
         return await axios.get(`${apiURL}/clsses?teacher.id=${tid}&_sort=title:ASC`)
