@@ -1,9 +1,27 @@
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 const SideBar = props => {
+
+    const [currentUser, setCurrentUser] = useState({})
+
+    const getCurrentUser = async () => {
+        try {
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            setCurrentUser(user)
+        } catch (err) {
+            // an err occured
+        }
+    }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
+
     return <div className="bg-gray-50 fixed inset-0 border-r w-1/12 h-screen md:flex flex-col pt-20 items-center justify-evenly hidden">
         {/* Students */}
-        <Link href='/students'>
+        {
+            currentUser.user_role !== 'student' && <Link href='/students'>
             <button className={`flex flex-col items-center ${props.menu === 'students' ? 'text-blue-400' : 'text-gray-400'}`}>
                 <svg className="h-8 w-8"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -12,9 +30,11 @@ const SideBar = props => {
                 <p className="font-bold text-xs">Students</p>
             </button>
         </Link>
+        }
 
         {/* parents */}
-        <Link href='/parents'>
+        {
+            currentUser.user_role !== 'parent' && currentUser.user_role !== 'student' && <Link href='/parents'>
             <button className={`flex flex-col items-center ${props.menu === 'parents' ? 'text-blue-400' : 'text-gray-400'}`}>
                 <svg className="h-8 w-8"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,9 +43,11 @@ const SideBar = props => {
                 <p className="font-bold text-sm">Parents</p>
             </button>
         </Link>
+        }
 
         {/* Assignment */}
-        <Link href='/assignments'>
+        {
+            currentUser.user_role !== 'parent' && <Link href='/assignments'>
             <button className={`flex flex-col items-center ${props.menu === 'assignments' ? 'text-blue-400' : 'text-gray-400'}`}>
                 <svg className="h-8 w-8"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -34,9 +56,11 @@ const SideBar = props => {
                 <p className="font-bold text-xs">Assignments</p>
             </button>
         </Link>
+        }
 
         {/* classes */}
-        <Link href="/classes">
+        {
+            currentUser.user_role !== 'parent' && <Link href="/classes">
             <button className={`flex flex-col items-center ${props.menu === 'classes' ? 'text-blue-400' : 'text-gray-400'}`}>
                 <svg className="h-8 w-8"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,9 +69,11 @@ const SideBar = props => {
                 <p className="font-bold text-xs">Classes</p>
             </button>
         </Link>
+        }
 
         {/* attendance */}
-        <Link href="/attendance">
+        {
+            currentUser.user_role !== 'parent' && currentUser.user_role !== 'student' && <Link href="/attendance">
             <button className={`flex flex-col items-center ${props.menu === 'attendance' ? 'text-blue-400' : 'text-gray-400'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
@@ -55,9 +81,11 @@ const SideBar = props => {
                 <p className="font-bold text-xs">Attendance</p>
             </button>
         </Link>
+        }
 
         {/* announcements */}
-        <Link href="/announcements">
+        {
+            currentUser.user_role !== 'parent' && <Link href="/announcements">
             <button className={`flex flex-col items-center ${props.menu === 'announcements' ? 'text-blue-400' : 'text-gray-400'}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
@@ -65,6 +93,7 @@ const SideBar = props => {
                 <p className="font-bold text-xs">Announcements</p>
             </button>
         </Link>
+        }
     </div>
 }
 
