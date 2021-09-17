@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { login } from '../api/base'
 import { showToast } from '../components/helpers'
+import Link from 'next/link'
 
 const Home = () => {
 
@@ -21,11 +22,16 @@ const Home = () => {
       }
 
       const res = await login(user)
-      res.status === 200 && (
-        console.log(res),
-        router.push('/dashboard'),
-        showToast('success', `Welcome ${user.identifier}`)
-      )
+      if (res.status === 200) {
+        if (res.data.user.user_role === 'parent') {
+          router.push('/pdashboard')
+        } else if (res.data.user.user_role === 'student') {
+          router.push('/sdashboard')
+        }
+        else {
+          router.push('/dashboard')
+        }
+      }
 
     } catch (err) {
       showToast('error', err.message)
@@ -75,22 +81,14 @@ const Home = () => {
                   Log in
                 </button>
               </form>
-
-              <p className="mt-4 text-center">
-                <a
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                  href="./forgot-password.html"
-                >
-                  Forgot your password?
-                </a>
-              </p>
               <p className="mt-1 text-center">
+                <Link href='/new-teacher'>
                 <a
                   className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                  href="./create-account.html"
                 >
                   Are you a teacher? Create account
                 </a>
+                </Link>
               </p>
             </div>
           </div>

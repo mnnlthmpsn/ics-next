@@ -127,3 +127,11 @@ export const add_announcement = async payload => {
         throw err
     }
 }
+
+export const get_assignment_for_class = async class_id => {
+    try {
+        return await axios.get(`${apiURL}/assignments?class.id=${class_id}`)
+    } catch (err) {
+        throw err
+    }
+}

@@ -55,9 +55,9 @@ const finalizeSignUp = async data => {
             parents.push(res.data[0])
         }
 
-        let email = `${data?.lastname.toLowerCase()}.${data?.firstname.toLowerCase()}@ics.com`
-        let username = `${data?.lastname.toLowerCase()}.${data?.firstname.toLowerCase()}`
-        let password = `${data?.lastname.toLowerCase()}.${data?.firstname.toLowerCase()}`
+        let email = `${data?.lastname.toLowerCase().replace(/\s/g, "")}.${data?.firstname.toLowerCase().replace(/\s/g, "")}@ics.com`
+        let username = `${data?.lastname.toLowerCase().replace(/\s/g, "")}.${data?.firstname.toLowerCase().replace(/\s/g, "")}`
+        let password = `${data?.lastname.toLowerCase().replace(/\s/g, "")}.${data?.firstname.toLowerCase().replace(/\s/g, "")}`
 
         const stud_payload = {
             email: email,
@@ -70,7 +70,6 @@ const finalizeSignUp = async data => {
         }
 
         const user_res = await signup(stud_payload)
-        console.log(user_res)
 
         const payload = {
             parents: parents,
@@ -79,6 +78,7 @@ const finalizeSignUp = async data => {
             gender: data?.gender,
             clss: data?.class,
             age: data?.age,
+            extra_curricular_activities: data?.extra_curricular_activities,
             profile: user_res?.data?.user?.id.toString()
         }
 

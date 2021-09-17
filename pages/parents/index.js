@@ -26,7 +26,6 @@ const Parent = () => {
     const getAllParents = async () => {
         try {
             const res = await get_all_parents()
-            console.log(res.data)
             setAllParents(res.data)
         } catch (err) {
             showToast('error', err.message)

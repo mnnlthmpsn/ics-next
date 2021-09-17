@@ -59,3 +59,11 @@ export const get_student_reports = async student_id => {
         throw error
     }
 }
+
+export const deleteStudent = async student_id => {
+    try {
+        return await axios.delete(`${apiURL}/students/${student_id}`)
+    } catch (err) {
+        throw err
+    }
+}
