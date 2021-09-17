@@ -69,11 +69,14 @@ const StudentDashboard = () => {
               <div className="pl-5">
                 <p className="text-xl text-gray-400 font-bold text-right">Actions</p>
                 <div className="flex space-x-4 justify-end">
-                    <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white duration-150 bg-green-400 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-500 focus:outline-none focus:shadow-outline-blue">
+                    <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white duration-150 bg-green-400 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-500 focus:outline-none focus:shadow-outline-green">
                         <Link href={`/pdashboard/reports/${profile.id}`}>Reports</Link>
                     </button>
                     <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-400 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue">
                         <Link href={`/pdashboard/assignments/${profile.clss?.id}`}>Assignments</Link>
+                    </button>
+                    <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-yellow-400 border border-transparent rounded-lg active:bg-yellow-500 hover:bg-yellow-500 focus:outline-none focus:shadow-outline-yellow">
+                        <Link href={`/sdashboard/announcements/${profile.clss?.id}`}>Announcements</Link>
                     </button>
                 </div>
               </div>

@@ -135,3 +135,11 @@ export const get_assignment_for_class = async class_id => {
         throw err
     }
 }
+
+export const get_announcement_for_class = async class_id => {
+    try {
+        return await axios.get(`${apiURL}/announcements?clss.id=${class_id}`)
+    } catch (err) {
+        throw err
+    }
+}
