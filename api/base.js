@@ -26,9 +26,9 @@ export const login = async (payload) => {
   }
 };
 
-export const get_all_comments = async () => {
+export const get_all_comments = async cid => {
   try {
-    return await axios.get(`${apiURL}/comments`);
+    return await axios.get(`${apiURL}/comments?author.id=${cid}`);
   } catch (err) {
     throw err;
   }
@@ -85,6 +85,14 @@ export const get_my_details = async () => {
 export const get_particular_student = async profile_id => {
   try {
     return await axios.get(`${apiURL}/students?profile.id=${profile_id}`)
+  } catch (err) {
+    throw err
+  }
+}
+
+export const new_parent_announcement = async announcement => {
+  try {
+    return await axios.post(`${apiURL}/parentnotifications`, announcement)
   } catch (err) {
     throw err
   }

@@ -81,15 +81,7 @@ const Home = () => {
                   Log in
                 </button>
               </form>
-              <p className="mt-1 text-center">
-                <Link href='/new-teacher'>
-                <a
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  Are you a teacher? Create account
-                </a>
-                </Link>
-              </p>
+              
             </div>
           </div>
         </div>

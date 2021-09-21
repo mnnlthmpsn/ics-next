@@ -21,10 +21,8 @@ const TakeAttendance = () => {
     const [description, setDescription] = useState('')
     const [currentUser, setCurrentUser] = useState({})
 
-    const testData = ['Joe', 'Kobby', 'Ama']
-
     const [enabled, setEnabled] = useState(
-        new Array(testData.length).fill(false)
+        new Array(100).fill(false)
     )
 
     const handleChange = pos => {
@@ -36,6 +34,8 @@ const TakeAttendance = () => {
             return index === pos ? !item : item
         })
 
+        console.log(updatedCheckedState)
+
         setEnabled(updatedCheckedState)
     }
 
@@ -43,7 +43,9 @@ const TakeAttendance = () => {
         setSelectedClass(class_id)
         try {
             const res = await get_all_students_for_class(class_id)
-            res.status === 200 && setStudents(res.data)
+            if (res.status === 200) {
+                setStudents(res.data)
+            } 
         } catch (err) {
             showToast('error', err.message)
         }
@@ -97,7 +99,7 @@ const TakeAttendance = () => {
         const today = new Date().toISOString().slice(0, 10)
         setDate(today)
         getCurrentUser()
-    }, [])
+    }, [students])
 
     return (
         <Fragment>

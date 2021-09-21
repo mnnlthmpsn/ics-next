@@ -47,3 +47,11 @@ export const get_teacher_count = async () => {
         throw err
     }
 }
+
+export const get_parent_announcements = async pid => {
+    try {
+        return await axios.get(`${apiURL}/parentnotifications?parents.id_in=${pid}`)
+    } catch (err) {
+        throw err
+    }
+}

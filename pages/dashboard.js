@@ -139,6 +139,19 @@ const Dashboard = () => {
                         />
                         }
 
+                        {
+                            currentUser.user_role === 'admin' && <NavMain
+                            title='Teachers'
+                            path='/teachers'
+                            icon={
+                                <svg className="h-32 w-32"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                </svg>
+                            }
+                        />
+                        }
+
                         {/* Assignments */}
                         {
                             currentUser.user_role !== 'parent'  && <NavMain
@@ -207,6 +220,19 @@ const Dashboard = () => {
                         />
                         }
 
+                        {/* Parent Announcement */}
+                        {
+                            currentUser.user_role !== 'parent' && <NavMain
+                            title='Parent Announcements'
+                            path='/announcements/parents'
+                            icon={
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clipRule="evenodd" />
+                                </svg>
+                            }
+                        />
+                        }
+
                         {/* Comments */}
                         {
                             currentUser.user_role !== 'parent' && <NavMain
@@ -227,8 +253,8 @@ const Dashboard = () => {
                             path='/change-password'
                             icon={
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32" viewBox="0 0 20 20" fill="currentColor">
-  <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
-</svg>
+                                    <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
+                                </svg>
                             }
                         />
                         }

@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react"
-import { add_comment, get_all_comments } from "../../api/base"
+import { add_comment, get_all_comments, get_my_details } from "../../api/base"
 import BreadCrumb from "../../components/breadcrumb"
 import { showToast } from "../../components/helpers"
 import { Input } from "../../components/input"
@@ -8,6 +8,7 @@ import SideBar from "../../components/sidebar"
 
 const Comment = () => {
 
+    const [home, setHome] = useState('/dashboard')
     const [all_comments, setAllComments] = useState([])
     const [comment, setComment] = useState({
         title: '',
@@ -16,8 +17,20 @@ const Comment = () => {
 
     const getAllComments = async () => {
         try {
-            const res = await get_all_comments()
+            const user = JSON.parse(sessionStorage.getItem('user'))
+            const res = await get_all_comments(user.id)
             res.status === 200 && setAllComments(res.data)
+            
+            if (user.user_role === 'parent') { 
+                setHome('/pdashboard')  
+                return 
+            }
+
+            if (user.user_role === 'student') { 
+                setHome('/sdashboard')  
+                return 
+            }
+
         } catch (err) {
             showToast('error', err.message)
         }
@@ -50,7 +63,7 @@ const Comment = () => {
             <Navbar />
             <SideBar menu='classes' />
             <div className="container p-5 md:pl-20">
-                <BreadCrumb currentPage='Comments' prevPage='Dashboard' prevLink='/dashboard' />
+                <BreadCrumb currentPage='Comments' prevPage='Dashboard' prevLink={home} />
                 <div className="grid grid-cols-1 md:grid-cols-3">
                     <div className="md:col-span-2 md:border-r md:mr-16 md:pr-5">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

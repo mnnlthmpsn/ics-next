@@ -54,6 +54,12 @@ const StudentDashboard = () => {
                   <p className="pl-2">{profile.clss?.title}</p>
                 </div>
 
+                {/* class */}
+                <div className="flex justify-between items-center">
+                  <p className="text-gray-400 font-bold">Teacher:</p>
+                  <p className="pl-2">{profile.teacher?.firstname} {profile.teacher?.firstname}</p>
+                </div>
+
                 {/* Age */}
                 <div className="flex justify-between items-center">
                   <p className="text-gray-400 font-bold">Age:</p>
@@ -68,7 +74,7 @@ const StudentDashboard = () => {
               </div>
               <div className="pl-5">
                 <p className="text-xl text-gray-400 font-bold text-right">Actions</p>
-                <div className="flex space-x-4 justify-end">
+                <div className="grid grid-cols-2 gap-4">
                     <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white duration-150 bg-green-400 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-500 focus:outline-none focus:shadow-outline-green">
                         <Link href={`/pdashboard/reports/${profile.id}`}>Reports</Link>
                     </button>
@@ -77,6 +83,9 @@ const StudentDashboard = () => {
                     </button>
                     <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-yellow-400 border border-transparent rounded-lg active:bg-yellow-500 hover:bg-yellow-500 focus:outline-none focus:shadow-outline-yellow">
                         <Link href={`/sdashboard/announcements/${profile.clss?.id}`}>Announcements</Link>
+                    </button>
+                    <button type='button' className="block w-auto px-4 py-3 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-gray-400 border border-transparent rounded-lg active:bg-gray-500 hover:bg-gray-500 focus:outline-none focus:shadow-outline-gray">
+                        <Link href={`/pdashboard/attendance/${profile?.id}`}>Attendance</Link>
                     </button>
                 </div>
               </div>

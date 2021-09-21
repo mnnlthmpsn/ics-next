@@ -48,7 +48,6 @@ const StudentDetail = ({ query }) => {
     const getStudentReports = async () => {
         try {
             const res = await get_student_reports(query.id)
-            console.log(res.data)
             setReports(res.data)
         } catch (err) {
             showToast('error', err.msg)
@@ -139,12 +138,8 @@ const StudentDetail = ({ query }) => {
                 <hr className="border w-full md:w-1/2 my-3" />
 
                 <div className="flex space-x-6 justify-between items-center w-full md:w-1/2">
-                    <p>Teachers: </p>
-                    {
-                        student.teachers?.map(teacher => (
-                            <p key={teacher.id}>{teacher.firstname} - {teacher.lastname} - {teacher.email}</p>
-                        ))
-                    }
+                    <p>Teacher: </p>
+                    <p>{student.teacher?.firstname} {student.teacher?.lastname}</p>
                 </div>
 
                 <hr className="border w-full md:w-1/2 my-3" />

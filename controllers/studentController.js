@@ -73,6 +73,7 @@ const finalizeSignUp = async data => {
 
         const payload = {
             parents: parents,
+            teacher: data?.teacher,
             firstname: data?.firstname,
             lastname: data?.lastname,
             gender: data?.gender,
@@ -82,6 +83,7 @@ const finalizeSignUp = async data => {
             profile: user_res?.data?.user?.id.toString()
         }
 
+        console.log(payload)
         return await add_student(payload)
 
     } catch (err) {

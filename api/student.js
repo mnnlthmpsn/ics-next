@@ -67,3 +67,11 @@ export const deleteStudent = async student_id => {
         throw err
     }
 }
+
+export const getStudentAttendance = async student_id => {
+    try {
+        return await axios.get(`${apiURL}/attendances?students.id_in=${student_id}`)
+    } catch (err) {
+        throw err
+    }
+}

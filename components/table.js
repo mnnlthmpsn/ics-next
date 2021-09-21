@@ -139,6 +139,7 @@ const Table = (props) => {
                     <td className="px-4 py-3">
                       <div className="flex items-center text-sm">
                         <div>
+                          {props.role === 'teacher' && (<p className="font-semibold">{data.firstname}</p>)}
                           {props.role === "parent" && (
                             <p className="font-semibold">{data.firstname}</p>
                           )}
@@ -165,6 +166,8 @@ const Table = (props) => {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-sm">
+                      {props.role === 'teacher' && (<p className="font-semibold">{data.lastname}</p>)}
+
                       {props.role === "parent" && (
                         <p className="font-semibold">{data.lastname}</p>
                       )}
@@ -192,6 +195,7 @@ const Table = (props) => {
                     </td>
                     {props.role !== "clss" && (
                       <td className="px-4 py-3 text-sm">
+                        {props.role === 'teacher' && <p>{data.email}</p>}
                         {props.role === "parent" && <p>{data.email}</p>}
                         {props.role === "student" && <p>{data.clss.title}</p>}
                         {props.role === "assignment" && (
@@ -210,7 +214,7 @@ const Table = (props) => {
                       </td>
                     )}
                     <td className="px-4 py-3 text-sm">
-                      {props.role === "parent" && <p>{data.phone}</p>}
+                      {props.role === "parent" || props.role === 'teacher' && <p>{data.phone}</p>}
                       {props.role === "student" && <p>{data.gender}</p>}
                       {props.role === "clss" && <p>{data.gender}</p>}
                       {props.role === "assignment" && (
