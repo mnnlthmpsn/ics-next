@@ -72,7 +72,6 @@ const delete_announcement = async id => {
 }
 
   const addAnnouncement = async (e) => {
-    console.log(announcement)
     e.preventDefault();
     try {
       const res = await add_announcement(announcement);
