@@ -231,7 +231,8 @@ const Table = (props) => {
                         </a>
                       )}
                     </td>
-                    <td className="px-4 py-3">
+                    {
+                      props.role === 'student' && <td className="px-4 py-3">
                       <div
                         className={`flex items-center space-x-4 text-sm ${
                           user.user_role === "parent" ? "hidden" : ""
@@ -280,6 +281,7 @@ const Table = (props) => {
                         </button>
                       </div>
                     </td>
+                    }
                   </tr>
                 ))
               ) : (
