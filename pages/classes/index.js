@@ -22,7 +22,7 @@ const Clss = () => {
 
     useEffect(() => {
         getCurrentUser()
-        
+        getTeachers()
     }, [])
 
     const getClasses = async (id='') => {
