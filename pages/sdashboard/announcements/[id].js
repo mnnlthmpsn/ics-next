@@ -22,6 +22,7 @@ const Announcement = ({ query }) => {
   const getAnnouncements = async () => {
     try {
         const res = await get_announcement_for_class(query.id)
+        console.log(res)
         setAnnouncements(res.data)
     } catch (err) {
         showToast('error', err.message)

@@ -57,7 +57,7 @@ const StudentDashboard = () => {
                 {/* class */}
                 <div className="flex justify-between items-center">
                   <p className="text-gray-400 font-bold">Teacher:</p>
-                  <p className="pl-2">{profile.teacher?.firstname} {profile.teacher?.firstname}</p>
+                  <p className="pl-2">{profile.teacher?.firstname} {profile.teacher?.lastname}</p>
                 </div>
 
                 {/* Age */}

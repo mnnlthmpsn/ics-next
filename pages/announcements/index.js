@@ -19,7 +19,7 @@ const Announcements = () => {
   const [classes, setClasses] = useState([]);
   const [announcement, setAnnouncement] = useState({
     title: "",
-    class: "",
+    clss: "",
     description: "",
   });
   const [currentUser, setCurrentUser] = useState({})
@@ -61,6 +61,7 @@ const getCurrentUser = async () => {
 }
 
   const addAnnouncement = async (e) => {
+    console.log(announcement)
     e.preventDefault();
     try {
       const res = await add_announcement(announcement);
@@ -68,7 +69,7 @@ const getCurrentUser = async () => {
         showToast("success", "Announcement added successfully"),
         close_modal();
       setIsLoading(!isLoading);
-      setAnnouncement({ title: "", description: "", class: "" });
+      setAnnouncement({ title: "", description: "", clss: "" });
     } catch (err) {
       showToast("error", err.message);
     }
@@ -91,7 +92,7 @@ const getCurrentUser = async () => {
           >
             <Select
               label="Class"
-              value={announcement.class}
+              value={announcement.clss}
               placeholder="Class"
               icon={
                 <svg
@@ -111,7 +112,7 @@ const getCurrentUser = async () => {
               }
               options={classes}
               onChange={(e) =>
-                setAnnouncement({ ...announcement, class: e.target.value })
+                setAnnouncement({ ...announcement, clss: e.target.value })
               }
             />
             {/* modal email */}
