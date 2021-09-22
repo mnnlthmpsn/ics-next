@@ -61,7 +61,6 @@ const Comment = () => {
     return (
         <Fragment>
             <Navbar />
-            <SideBar menu='classes' />
             <div className="container p-5 md:pl-20">
                 <BreadCrumb currentPage='Comments' prevPage='Dashboard' prevLink={home} />
                 <div className="grid grid-cols-1 md:grid-cols-3">
