@@ -7,6 +7,7 @@ import { ModalContext } from "../../contexts/modalContext"
 import Modal from "../../components/modal"
 import { showToast } from "../../components/helpers"
 import SideBar from "../../components/sidebar"
+import Link from 'next/link'
 
 const ContactDetail = ({ query }) => {
 
@@ -28,6 +29,7 @@ const ContactDetail = ({ query }) => {
     const getClassDetails = async () => {
         try {
             const res = await get_class(query.id)
+            console.log(res)
             setClass(res.data)
             setStudents(res.data.students)
         } catch (err) {
@@ -90,7 +92,8 @@ const ContactDetail = ({ query }) => {
             <div className="container">
                 <BreadCrumb currentPage='Class Details' prevPage='Classes' prevLink='/classes' />
                 <div className="flex item-center justify-end space-x-1">
-                    <button onClick={open_modal}
+                    <Link href={`/classes/assignment/${query.id}`}>
+                    <button
                         className="flex w-auto px-4 py-3 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-green-400 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-500 focus:outline-none focus:shadow-outline-blue">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -98,6 +101,7 @@ const ContactDetail = ({ query }) => {
                         </svg>
                         View Assignments
                     </button>
+                    </Link>
                     <button onClick={open_modal}
                         className="flex w-auto px-4 py-3 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-400 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -109,7 +113,7 @@ const ContactDetail = ({ query }) => {
                 </div>
                 <div className="flex item-center justify-between px-4 py-2 bg-gray-50 border mt-2 rounded-t-lg">
                     <p className="text-gray-400 font-bold">{clss.title} Students</p>
-                    <p><span className="text-gray-400 font-bold">Teacher</span>: {`${currentUser.firstname} ${currentUser.lastname}`}</p>
+                    <p><span className="text-gray-400 font-bold">Teacher</span>: {`${clss.teacher?.firstname} ${clss.teacher?.lastname}`}</p>
                 </div>
                 <Table data={students} headings={HEADINGS} role='clss' />
             </div>

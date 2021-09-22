@@ -17,7 +17,7 @@ const NewTeacher = () => {
     class: "",
     user_role: "teacher",
     phone: "",
-    password: "",
+    password: "password123",
   });
 
   const getClasses = async () => {
@@ -75,7 +75,7 @@ const NewTeacher = () => {
             />
           </label>
 
-          <label className="block text-sm">
+          {/* <label className="block text-sm">
             <span className="text-gray-400 font-semibold">Password</span>
             <input
               type="password"
@@ -86,7 +86,7 @@ const NewTeacher = () => {
               placeholder="***************"
               required
             />
-          </label>
+          </label> */}
 
           <label className="block text-sm">
             <span className="text-gray-400 font-semibold">Firstname</span>

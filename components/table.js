@@ -151,7 +151,7 @@ const Table = (props) => {
                             </Link>
                           )}
                           {props.role === "clss" && (
-                            <p className="font-semibold">{data.clss.title}</p>
+                            <p className="font-semibold">{data.firstname}</p>
                           )}
                           {props.role === "assignment" && (
                             <p className="font-semibold">{data.class.title}</p>
@@ -214,7 +214,8 @@ const Table = (props) => {
                       </td>
                     )}
                     <td className="px-4 py-3 text-sm">
-                      {props.role === "parent" || props.role === 'teacher' && <p>{data.phone}</p>}
+                      {props.role === "parent" && <p>{data.phone}</p>}
+                      {props.role === "teacher" && <p>{data.phone}</p>}
                       {props.role === "student" && <p>{data.gender}</p>}
                       {props.role === "clss" && <p>{data.gender}</p>}
                       {props.role === "assignment" && (

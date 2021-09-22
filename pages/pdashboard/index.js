@@ -82,7 +82,7 @@ const ParentDashboard = () => {
 
                 {/* teachher */}
                 <div className="flex justify-between items-center">
-                  <p className="text-gray-400 font-bold">Class:</p>
+                  <p className="text-gray-400 font-bold">Teacher:</p>
                   <p className="pl-2">
                     {student.teacher?.firstname} {student.teacher?.lastname}
                   </p>
