@@ -129,7 +129,7 @@ const Table = (props) => {
                     {heading}
                   </th>
                 ))}
-                <th className="px-4 py-3">Actions</th>
+                {props.role === 'student' && <th className="px-4 py-3">Actions</th>}
               </tr>
             </thead>
             <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
