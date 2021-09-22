@@ -105,3 +105,11 @@ export const get_assignments_for_class = async class_id => {
     throw err
   }
 }
+
+export const del_anc = async id => {
+  try {
+    return await axios.delete(`${apiURL}/announcements/${id}`)
+  } catch (error) {
+    throw error
+  }
+}

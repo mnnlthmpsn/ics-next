@@ -12,6 +12,7 @@ import {
   get_all_classes,
   get_classes_for_teacher,
 } from "../../api/teacher";
+import { del_anc } from "../../api/base";
 
 const Announcements = () => {
   const { open, open_modal, close_modal } = useContext(ModalContext);
@@ -58,6 +59,16 @@ const getCurrentUser = async () => {
     } catch (err) {
         // an err occured
     }
+}
+
+const delete_announcement = async id => {
+  try {
+    const res = await del_anc(id)
+    res.status === 200 && showToast('succes', 'Announcement deleted successfully')
+    window.location.reload()
+  } catch (err) {
+    showToast('error', err.message)
+  }
 }
 
   const addAnnouncement = async (e) => {
@@ -186,9 +197,11 @@ const getCurrentUser = async () => {
                   <p className="font-bold text-lg text-gray-600">{anc.title}</p>
                   <p className="text-gray-400">{anc.description}</p>
                 </div>
-                <svg
+                {
+                  currentUser.user_role === 'admin' && <svg
+                  onClick={() => delete_announcement(anc.id)}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-red-400"
+                  className="h-6 w-6 text-red-400 cursor-pointer"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -200,6 +213,7 @@ const getCurrentUser = async () => {
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                   />
                 </svg>
+                }
               </div>
             ))
           ) : (
